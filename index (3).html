@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Court of the Orange Garden — Case No. 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181f;
+    --ink-soft:#1c2129;
+    --ink-line: rgba(232,226,210,0.14);
+    --paper:#f1ead8;
+    --paper-shadow: rgba(20,24,31,0.35);
+    --paper-line:#d9caa0;
+    --ink-text:#241f16;
+    --ink-text-soft:#5a5240;
+    --cream:#e8e2d2;
+    --cream-soft:#a39c8a;
+    --gold:#b9924a;
+    --gold-bright:#d9b46a;
+    --wine:#7c2632;
+    --wine-bright:#9c3140;
+    --sage:#606f52;
+    --radius: 3px;
+    --max: 780px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 15% -10%, rgba(185,146,74,0.08), transparent 60%),
+      radial-gradient(1000px 600px at 100% 20%, rgba(124,38,50,0.08), transparent 55%),
+      var(--ink);
+    color: var(--cream);
+    font-family: "Source Serif 4", Georgia, serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  a{ color: var(--gold-bright); }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 20px 120px; }
+
+  /* ---------- Header / letterhead ---------- */
+  header.letterhead{
+    padding: 56px 20px 40px;
+    text-align:center;
+    border-bottom: 1px solid var(--ink-line);
+    margin-bottom: 48px;
+  }
+  .seal{ width:84px; height:84px; margin: 0 auto 20px; opacity:0.95; }
+  .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 14px;
+  }
+  h1.title{
+    font-family:"Fraunces", serif;
+    font-weight:600;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height:1.08;
+    margin: 0 0 12px;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+  .subtitle{
+    font-style: italic;
+    color: var(--cream-soft);
+    font-size: 16px;
+    margin: 0 0 18px;
+  }
+  .case-meta{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--cream-soft);
+    display:flex; gap: 18px; justify-content:center; flex-wrap:wrap;
+    letter-spacing:0.03em;
+  }
+  .case-meta span{ border-left: 1px solid var(--ink-line); padding-left: 18px; }
+  .case-meta span:first-child{ border-left:none; padding-left:0; }
+
+  /* ---------- Section headings ---------- */
+  h2.section-head{
+    font-family:"Fraunces", serif;
+    font-weight:600;
+    font-size: clamp(20px, 3vw, 26px);
+    color: var(--cream);
+    margin: 0 0 6px;
+  }
+  .section-eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+  section.block{ margin-bottom: 56px; }
+  p.lede{ color: var(--cream-soft); font-size: 15.5px; }
+
+  /* ---------- Roster panel ---------- */
+  .roster{
+    background: var(--paper);
+    color: var(--ink-text);
+    border-radius: var(--radius);
+    padding: 28px 28px 20px;
+    box-shadow: 0 18px 40px -20px var(--paper-shadow);
+  }
+  .roster h3{
+    font-family:"Fraunces", serif; font-weight:600; font-size:16px;
+    margin:0 0 4px; text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .roster .roster-note{ font-size:13px; color:var(--ink-text-soft); margin: 0 0 18px; font-style: italic; }
+  .roster-grid{ display:grid; grid-template-columns: 1fr; gap: 4px 24px; }
+  @media(min-width:560px){ .roster-grid{ grid-template-columns: 1fr 1fr; } }
+  .roster-row{
+    display:flex; justify-content:space-between; gap:12px;
+    padding: 9px 0; border-bottom: 1px solid var(--paper-line);
+    font-size: 14.5px;
+  }
+  .roster-role{ color: var(--ink-text-soft); font-size: 12.5px; }
+  .roster-name{ font-weight:600; }
+  .tag-accused{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 10px; letter-spacing:0.06em;
+    color: var(--wine); border:1px solid var(--wine);
+    padding: 1px 6px; border-radius: 20px; margin-left:8px;
+    vertical-align: middle; white-space:nowrap;
+  }
+
+  /* ---------- Statement quote blocks ---------- */
+  .statement{
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 20px;
+    margin: 20px 0;
+  }
+  .statement .who{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color: var(--gold-bright); margin-bottom: 8px;
+  }
+  .statement p{ margin: 0 0 10px; color: var(--cream); font-size: 15.5px; }
+  .statement p:last-child{ margin-bottom:0; }
+
+  /* ---------- Procedure note ---------- */
+  .procedure{
+    background: var(--ink-soft);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    font-size: 14.5px;
+    color: var(--cream-soft);
+  }
+  .procedure strong{ color: var(--cream); }
+
+  /* ---------- Case file card ---------- */
+  .case{
+    background: var(--paper);
+    color: var(--ink-text);
+    border-radius: var(--radius);
+    box-shadow: 0 24px 50px -24px var(--paper-shadow);
+    overflow: hidden;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .case.in-view{ opacity:1; transform:none; }
+
+  .case-tab{
+    display:flex; align-items:center; justify-content:space-between;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px 24px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .case-tab .num{ color: var(--gold-bright); }
+  .case-tab .defendant{ color: var(--cream-soft); }
+
+  .case-body{ padding: 26px 26px 8px; }
+  .case-body h3{
+    font-family:"Fraunces", serif; font-weight:600;
+    font-size: 21px; margin: 0 0 4px;
+  }
+  .case-body .charge-name{ color: var(--wine); font-style: italic; font-size: 15px; margin: 0 0 16px; }
+  .case-body p{ font-size: 15px; margin: 0 0 14px; }
+
+  .charge-item{ padding: 18px 0; border-top: 1px solid var(--paper-line); }
+  .charge-item:first-child{ border-top: none; padding-top: 4px; }
+  .charge-item .charge-label{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing:0.08em; text-transform:uppercase;
+    color: var(--sage); margin-bottom:6px;
+  }
+
+  /* exhibit / evidence block */
+  .exhibit{
+    position: relative;
+    margin: 14px 0 20px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .exhibit video{ display:block; width:100%; height:auto; background:#000; }
+  .exhibit-stamp{
+    position:absolute; top:12px; right:12px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 10.5px; letter-spacing:0.1em;
+    color: var(--wine-bright);
+    border: 1.5px solid var(--wine-bright);
+    padding: 4px 9px; border-radius:3px;
+    background: rgba(20,24,31,0.55);
+    transform: rotate(-4deg);
+    text-transform:uppercase;
+    pointer-events:none;
+  }
+  .no-exhibit{
+    font-size: 13.5px; font-style: italic; color: var(--ink-text-soft);
+    padding: 10px 14px; background: rgba(96,111,82,0.08);
+    border: 1px dashed var(--paper-line); border-radius: var(--radius);
+    margin: 14px 0 20px;
+  }
+
+  /* reply area */
+  .reply-label{
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing:0.08em; text-transform:uppercase;
+    color: var(--ink-text-soft); margin: 4px 0 8px;
+  }
+  textarea.reply{
+    width:100%; min-height: 64px; resize:vertical;
+    background: #fbf8f0; border: 1px solid var(--paper-line);
+    border-radius: var(--radius); padding: 10px 12px;
+    font-family:"Source Serif 4", serif; font-size: 14.5px; color: var(--ink-text);
+    margin-bottom: 6px;
+  }
+  textarea.reply:focus-visible{ outline: 2px solid var(--wine); outline-offset: 1px; }
+  .reply-hint{ font-size:12px; color: var(--ink-text-soft); margin: 0 0 18px; }
+
+  /* verdict control */
+  .verdict-row{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap: 12px;
+    padding: 16px 0 20px;
+    border-top: 1px solid var(--paper-line);
+  }
+  .verdict-charge{ font-size: 13.5px; font-weight:600; max-width: 60%; }
+  .verdict-note{ font-size:12px; color: var(--ink-text-soft); font-style:italic; font-weight:400; display:block; margin-top:2px;}
+  .verdict-options{ display:flex; gap:10px; }
+  .vopt{
+    display:flex; align-items:center; gap:6px;
+    font-family:"IBM Plex Mono", monospace; font-size:12px;
+    padding: 7px 12px; border-radius: 20px;
+    border: 1px solid var(--paper-line);
+    cursor:pointer; user-select:none;
+    background: #fbf8f0;
+  }
+  .vopt input{ accent-color: var(--wine); margin:0; }
+  .vopt:has(input:checked){ border-color: var(--wine); background: rgba(124,38,50,0.08); color: var(--wine); }
+
+  /* ---------- Verdict ledger ---------- */
+  .ledger{
+    background: var(--ink-soft);
+    border: 1px solid var(--ink-line);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+  }
+  .ledger-tally{
+    display:flex; gap: 22px; flex-wrap:wrap;
+    font-family:"IBM Plex Mono", monospace; font-size: 13px;
+    margin-bottom: 18px; padding-bottom:18px; border-bottom: 1px solid var(--ink-line);
+    color: var(--cream-soft);
+  }
+  .ledger-tally b{ color: var(--cream); font-size: 16px; display:block; }
+  .ledger-list{ list-style:none; margin:0; padding:0; }
+  .ledger-list li{
+    display:flex; justify-content:space-between; gap: 10px;
+    padding: 10px 0; border-bottom: 1px dashed var(--ink-line);
+    font-size: 14px;
+  }
+  .ledger-list li:last-child{ border-bottom:none; }
+  .ledger-list .lname{ color: var(--cream-soft); }
+  .ledger-status{
+    font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.05em;
+    text-transform:uppercase; padding: 2px 10px; border-radius: 20px;
+    white-space:nowrap;
+  }
+  .ledger-status.pending{ color: var(--cream-soft); border: 1px solid var(--ink-line); }
+  .ledger-status.guilty{ color: var(--wine-bright); border: 1px solid var(--wine-bright); }
+  .ledger-status.notguilty{ color: var(--sage); border: 1px solid var(--sage); }
+
+  /* ---------- Sentencing ---------- */
+  .sentencing-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .sentencing-item{
+    display:flex; gap:12px; align-items:flex-start;
+    background: var(--ink-soft); border:1px solid var(--ink-line);
+    border-radius: var(--radius); padding: 14px 16px;
+    font-size: 14.5px;
+  }
+  .sentencing-item input{ margin-top:4px; accent-color: var(--gold); }
+  .sentencing-item label{ cursor:pointer; }
+  .sentencing-item .s-title{ font-weight:600; color: var(--cream); display:block; margin-bottom:2px;}
+  .sentencing-item .s-desc{ color: var(--cream-soft); font-size:13.5px; }
+  .sentencing-item:has(input:checked){ border-color: var(--gold); background: rgba(185,146,74,0.07); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center; padding: 50px 20px 10px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size: 11.5px; letter-spacing:0.08em;
+    color: var(--cream-soft); text-transform:uppercase;
+  }
+
+  ::selection{ background: var(--gold); color: var(--ink); }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline: 2px solid var(--gold-bright); outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <svg class="seal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Court seal">
+    <circle cx="60" cy="60" r="56" stroke="#b9924a" stroke-width="2"/>
+    <circle cx="60" cy="60" r="49" stroke="#b9924a" stroke-width="1" opacity="0.5"/>
+    <line x1="60" y1="28" x2="60" y2="86" stroke="#e8e2d2" stroke-width="1.6"/>
+    <line x1="34" y1="40" x2="86" y2="40" stroke="#e8e2d2" stroke-width="1.6"/>
+    <line x1="34" y1="40" x2="23" y2="61" stroke="#e8e2d2" stroke-width="1.2"/>
+    <line x1="34" y1="40" x2="45" y2="61" stroke="#e8e2d2" stroke-width="1.2"/>
+    <path d="M18 61 Q34 74 50 61" stroke="#e8e2d2" stroke-width="1.2" fill="none"/>
+    <line x1="86" y1="40" x2="75" y2="61" stroke="#e8e2d2" stroke-width="1.2"/>
+    <line x1="86" y1="40" x2="97" y2="61" stroke="#e8e2d2" stroke-width="1.2"/>
+    <path d="M70 61 Q86 74 102 61" stroke="#e8e2d2" stroke-width="1.2" fill="none"/>
+    <line x1="44" y1="86" x2="76" y2="86" stroke="#e8e2d2" stroke-width="1.6"/>
+  </svg>
+  <div class="kicker">Tribunale del Giardino degli Aranci</div>
+  <h1 class="title">The Court of the<br>Orange Garden</h1>
+  <p class="subtitle">Case No. 1 — The Battle of the Balcony</p>
+  <div class="case-meta">
+    <span>Sicily, Hockey Tour 2026</span>
+    <span>4 Defendants</span>
+    <span>7 Charges</span>
+    <span>5 Exhibits</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="block">
+    <div class="section-eyebrow">Dramatis Personae</div>
+    <h2 class="section-head">Roll of the Court</h2>
+    <div class="roster" style="margin-top:20px;">
+      <h3>Presiding</h3>
+      <div class="roster-grid" style="margin-bottom:18px;">
+        <div class="roster-row"><span class="roster-name">Sparkes</span><span class="roster-role">Narrator</span></div>
+        <div class="roster-row"><span class="roster-name">Moran</span><span class="roster-role">Judge</span></div>
+      </div>
+      <h3>Jury</h3>
+      <p class="roster-note">Includes all four defendants. A defendant does not vote on their own charge, but votes on every other case before the court.</p>
+      <div class="roster-grid">
+        <div class="roster-row"><span class="roster-name">Spenny</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">d-dubz</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Strutt</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Oscar</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Wifty</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Chompson</span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">shnics<span class="tag-accused">Accused</span></span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">swampgimp<span class="tag-accused">Accused</span></span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Norn<span class="tag-accused">Accused</span></span><span class="roster-role">Juror</span></div>
+        <div class="roster-row"><span class="roster-name">Gforce<span class="tag-accused">Accused</span></span><span class="roster-role">Juror</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-eyebrow">Procedure</div>
+    <h2 class="section-head">Opening of the Court</h2>
+    <div class="procedure" style="margin-top:16px;">
+      There is no prosecution or defense counsel in these proceedings. <strong>Sparkes</strong> presents each case in turn, drawing on footage captured throughout the evening by Spenny, entered into evidence as the primary record. <strong>Moran</strong> presides. All other members of the tour sit as jury — including the four individuals facing charges. A defendant does not vote on their own charge, but remains part of the jury for every other case, including those of their fellow defendants.
+    </div>
+
+    <div class="statement">
+      <div class="who">Narrator — Sparkes</div>
+      <p>This court is convened to establish what took place last night during the events that have since been referred to as the Battle of the Balcony. Four members of this tour face charges arising from that evening. I have been asked to conduct these proceedings on behalf of the tour. The footage entered into evidence was captured throughout by Spenny, and forms the basis of what you are about to hear.</p>
+      <p>Each case will be presented in turn. Each defendant will have the opportunity to respond. The jury will then vote on each charge individually. I would ask that the proceedings be given the attention they deserve.</p>
+    </div>
+
+    <div class="statement" style="border-color: var(--wine);">
+      <div class="who" style="color: var(--wine-bright);">Judge — Moran</div>
+      <p>This court is now in session. Four individuals stand accused, across seven separate charges. Each will be heard fairly and in full before any verdict is reached. Members of the jury, you are reminded that you may not vote on a charge brought against yourselves, but you are expected to participate fully in every other case before this court. Let us begin.</p>
+    </div>
+  </section>
+
+  <!-- CASE 1 — SHNICS -->
+  <section class="block">
+    <div class="case" data-case>
+      <div class="case-tab"><span class="num">CASE 01 · EXHIBIT A</span><span class="defendant">shnics</span></div>
+      <div class="case-body">
+        <h3>Launch of an Incendiary Projectile</h3>
+        <p class="charge-name">The People vs. shnics</p>
+        <p><strong>Narrator (Sparkes):</strong> "shnics is charged with launching a projectile that was, at the point of release, on fire. The footage shows a clear flight path and a landing zone within range of other combatants at the time."</p>
+
+        <div class="exhibit">
+          <span class="exhibit-stamp">Exhibit A</span>
+          <video controls preload="metadata" poster="videos/exhibit-incendiary-projectile.jpg">
+            <source src="videos/exhibit-incendiary-projectile.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="reply-label">Defendant's Reply — shnics</div>
+        <textarea class="reply" aria-label="shnics reply" placeholder="Recorded live during the session..."></textarea>
+        <p class="reply-hint">No counsel. shnics speaks for himself.</p>
+
+        <div class="verdict-row">
+          <span class="verdict-charge">Incendiary Projectile<span class="verdict-note">shnics does not vote on this charge</span></span>
+          <div class="verdict-options" data-charge="shnics-incendiary" data-label="shnics — Incendiary Projectile">
+            <label class="vopt"><input type="radio" name="v-shnics-incendiary" value="guilty"> Guilty</label>
+            <label class="vopt"><input type="radio" name="v-shnics-incendiary" value="notguilty"> Not Guilty</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 2 — SWAMPGIMP -->
+  <section class="block">
+    <div class="case" data-case>
+      <div class="case-tab"><span class="num">CASE 02</span><span class="defendant">swampgimp</span></div>
+      <div class="case-body">
+        <h3>Four Charges</h3>
+        <p class="charge-name">The People vs. swampgimp</p>
+        <p>Swampgimp faces four separate charges arising from the events of last night.</p>
+
+        <div class="charge-item">
+          <div class="charge-label">Charge One</div>
+          <p><strong>Initiating Hostilities</strong> — by launching the first oranges from the Orange Garden without prior provocation.</p>
+          <div class="no-exhibit">No video evidence submitted for this charge.</div>
+          <div class="verdict-row">
+            <span class="verdict-charge">Initiating Hostilities<span class="verdict-note">swampgimp does not vote on this charge</span></span>
+            <div class="verdict-options">
+              <label class="vopt"><input type="radio" name="v-swamp-oranges" value="guilty"> Guilty</label>
+              <label class="vopt"><input type="radio" name="v-swamp-oranges" value="notguilty"> Not Guilty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="charge-item">
+          <div class="charge-label">Charge Two · Exhibit B</div>
+          <p><strong>Escalation to Stonework</strong> — by introducing rocks into the conflict after it had begun on fruit alone.</p>
+          <div class="exhibit">
+            <span class="exhibit-stamp">Exhibit B</span>
+            <video controls preload="metadata" poster="videos/exhibit-rock-throwing.jpg">
+              <source src="videos/exhibit-rock-throwing.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-charge">Escalation to Stonework<span class="verdict-note">swampgimp does not vote on this charge</span></span>
+            <div class="verdict-options">
+              <label class="vopt"><input type="radio" name="v-swamp-rocks" value="guilty"> Guilty</label>
+              <label class="vopt"><input type="radio" name="v-swamp-rocks" value="notguilty"> Not Guilty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="charge-item">
+          <div class="charge-label">Charge Three · Exhibit C</div>
+          <p><strong>Grievous Escalation by Beer Bottle</strong> — for responding to a single water balloon thrown by Sparkes with a full glass bottle of Birra Messina, an act that resulted in what has been recorded as complete headloss.</p>
+          <div class="exhibit">
+            <span class="exhibit-stamp">Exhibit C</span>
+            <video controls preload="metadata" poster="videos/exhibit-bottle-waterballoon.jpg">
+              <source src="videos/exhibit-bottle-waterballoon.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-charge">Grievous Escalation by Beer Bottle<span class="verdict-note">swampgimp does not vote on this charge</span></span>
+            <div class="verdict-options">
+              <label class="vopt"><input type="radio" name="v-swamp-bottle" value="guilty"> Guilty</label>
+              <label class="vopt"><input type="radio" name="v-swamp-bottle" value="notguilty"> Not Guilty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="charge-item">
+          <div class="charge-label">Charge Four</div>
+          <p><strong>False Accusation</strong> — for publicly accusing Gforce of stealing his phone. The footage instead shows swampgimp removing his own clothes, phone included, and placing them on a bench before entering the battle unclothed. Gforce did not take the phone. The accusation was without foundation.</p>
+          <div class="no-exhibit">No video evidence submitted for this charge.</div>
+          <div class="verdict-row">
+            <span class="verdict-charge">False Accusation against Gforce<span class="verdict-note">swampgimp does not vote on this charge</span></span>
+            <div class="verdict-options">
+              <label class="vopt"><input type="radio" name="v-swamp-accusation" value="guilty"> Guilty</label>
+              <label class="vopt"><input type="radio" name="v-swamp-accusation" value="notguilty"> Not Guilty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="reply-label" style="margin-top:6px;">Defendant's Reply — swampgimp</div>
+        <textarea class="reply" aria-label="swampgimp reply" placeholder="Recorded live during the session..."></textarea>
+        <p class="reply-hint">No counsel. swampgimp speaks for himself, across all four charges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 3 — NORN -->
+  <section class="block">
+    <div class="case" data-case>
+      <div class="case-tab"><span class="num">CASE 03 · EXHIBIT D</span><span class="defendant">Norn</span></div>
+      <div class="case-body">
+        <h3>Incitement to Bottle-Throwing</h3>
+        <p class="charge-name">The People vs. Norn</p>
+        <p><strong>Narrator (Sparkes):</strong> "This charge came to light only on review of the footage after the event. Norn is heard on camera actively encouraging others to throw bottles during the conflict. The audio is clear, as is the intent."</p>
+
+        <div class="exhibit">
+          <span class="exhibit-stamp">Exhibit D</span>
+          <video controls preload="metadata" poster="videos/exhibit-norn-incitement.jpg">
+            <source src="videos/exhibit-norn-incitement.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="reply-label">Defendant's Reply — Norn</div>
+        <textarea class="reply" aria-label="Norn reply" placeholder="Recorded live during the session..."></textarea>
+        <p class="reply-hint">No counsel. Norn speaks for herself/himself.</p>
+
+        <div class="verdict-row">
+          <span class="verdict-charge">Incitement to Bottle-Throwing<span class="verdict-note">Norn does not vote on this charge</span></span>
+          <div class="verdict-options">
+            <label class="vopt"><input type="radio" name="v-norn-incitement" value="guilty"> Guilty</label>
+            <label class="vopt"><input type="radio" name="v-norn-incitement" value="notguilty"> Not Guilty</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 4 — GFORCE -->
+  <section class="block">
+    <div class="case" data-case>
+      <div class="case-tab"><span class="num">CASE 04 · EXHIBIT E</span><span class="defendant">Gforce</span></div>
+      <div class="case-body">
+        <h3>Reckless Knife-Wielding</h3>
+        <p class="charge-name">The People vs. Gforce</p>
+        <p><strong>Narrator (Sparkes):</strong> "Gforce, separately from the phone matter on which he has already been cleared, is charged with wielding a knife in a Fruit Ninja-style manner during active combat, with other members of the group in close proximity."</p>
+
+        <div class="exhibit">
+          <span class="exhibit-stamp">Exhibit E</span>
+          <video controls preload="metadata" poster="videos/exhibit-fruit-ninja.jpg">
+            <source src="videos/exhibit-fruit-ninja.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="reply-label">Defendant's Reply — Gforce</div>
+        <textarea class="reply" aria-label="Gforce reply" placeholder="Recorded live during the session..."></textarea>
+        <p class="reply-hint">No counsel. Gforce speaks for himself.</p>
+
+        <div class="verdict-row">
+          <span class="verdict-charge">Reckless Knife-Wielding<span class="verdict-note">Gforce does not vote on this charge</span></span>
+          <div class="verdict-options">
+            <label class="vopt"><input type="radio" name="v-gforce-knife" value="guilty"> Guilty</label>
+            <label class="vopt"><input type="radio" name="v-gforce-knife" value="notguilty"> Not Guilty</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-eyebrow">Deliberation</div>
+    <h2 class="section-head">Instruction to the Jury</h2>
+    <div class="statement" style="border-color: var(--wine); margin-top:16px;">
+      <div class="who" style="color: var(--wine-bright);">Judge — Moran</div>
+      <p>You have heard all four cases. As a reminder, you do not vote on a charge brought against yourself, but you are expected to vote on every other case, including those brought against your fellow defendants. Deliberate accordingly.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-eyebrow">Live Record</div>
+    <h2 class="section-head">Verdict Ledger</h2>
+    <p class="lede">Updates automatically as verdicts are entered above.</p>
+    <div class="ledger" style="margin-top:16px;">
+      <div class="ledger-tally">
+        <div><b id="tally-guilty">0</b>Guilty</div>
+        <div><b id="tally-notguilty">0</b>Not Guilty</div>
+        <div><b id="tally-pending">7</b>Pending</div>
+      </div>
+      <ul class="ledger-list" id="ledger-list"></ul>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-eyebrow">Disposition</div>
+    <h2 class="section-head">Sentencing Menu</h2>
+    <p class="lede">To be applied at the Judge's discretion against any guilty verdict above.</p>
+    <ul class="sentencing-list" style="margin-top:16px;">
+      <li class="sentencing-item">
+        <input type="checkbox" id="s1"><label for="s1"><span class="s-title">The Chundie</span><span class="s-desc">Forfeit drink, judge's choice.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s2"><label for="s2"><span class="s-title">Community Service</span><span class="s-desc">Washing up / ice run / drinks run for the remainder of the tour.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s3"><label for="s3"><span class="s-title">Public Apology</span><span class="s-desc">Required of swampgimp to Gforce, regarding the phone accusation.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s4"><label for="s4"><span class="s-title">Reparations</span><span class="s-desc">Swampgimp to replace the Birra Messina in question.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s5"><label for="s5"><span class="s-title">Probation</span><span class="s-desc">Banned from initiating any games at dinner for 24 hours.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s6"><label for="s6"><span class="s-title">The Walk of Shame</span><span class="s-desc">One lap of the villa, dress code determined by the table.</span></label>
+      </li>
+      <li class="sentencing-item">
+        <input type="checkbox" id="s7"><label for="s7"><span class="s-title">Time Served</span><span class="s-desc">Case dismissed with a formal warning.</span></label>
+      </li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="section-eyebrow">Closing</div>
+    <h2 class="section-head">Close of Court</h2>
+    <div class="statement" style="margin-top:16px;">
+      <div class="who">Narrator — Sparkes</div>
+      <p>That concludes the evidence and testimony before this court. The verdicts and sentencing recommendations reached by the jury today should be taken as final. This court is now closed.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>Tribunale del Giardino degli Aranci &middot; Case No. 1 &middot; Sicily, 2026</footer>
+
+<script>
+  // Case card reveal on scroll
+  (function(){
+    var cases = document.querySelectorAll('[data-case]');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      cases.forEach(function(c){ io.observe(c); });
+    } else {
+      cases.forEach(function(c){ c.classList.add('in-view'); });
+    }
+  })();
+
+  // Verdict ledger
+  (function(){
+    var charges = [
+      { name: 'v-shnics-incendiary', label: 'shnics — Incendiary Projectile' },
+      { name: 'v-swamp-oranges', label: 'swampgimp — Initiating Hostilities' },
+      { name: 'v-swamp-rocks', label: 'swampgimp — Escalation to Stonework' },
+      { name: 'v-swamp-bottle', label: 'swampgimp — Grievous Escalation by Beer Bottle' },
+      { name: 'v-swamp-accusation', label: 'swampgimp — False Accusation' },
+      { name: 'v-norn-incitement', label: 'Norn — Incitement to Bottle-Throwing' },
+      { name: 'v-gforce-knife', label: 'Gforce — Reckless Knife-Wielding' }
+    ];
+
+    var list = document.getElementById('ledger-list');
+    var rows = {};
+
+    charges.forEach(function(c){
+      var li = document.createElement('li');
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'lname';
+      nameSpan.textContent = c.label;
+      var statusSpan = document.createElement('span');
+      statusSpan.className = 'ledger-status pending';
+      statusSpan.textContent = 'Pending';
+      li.appendChild(nameSpan);
+      li.appendChild(statusSpan);
+      list.appendChild(li);
+      rows[c.name] = statusSpan;
+    });
+
+    function refreshTally(){
+      var guilty = 0, notguilty = 0, pending = 0;
+      charges.forEach(function(c){
+        var checked = document.querySelector('input[name="' + c.name + '"]:checked');
+        var span = rows[c.name];
+        if(checked && checked.value === 'guilty'){
+          span.textContent = 'Guilty'; span.className = 'ledger-status guilty'; guilty++;
+        } else if(checked && checked.value === 'notguilty'){
+          span.textContent = 'Not Guilty'; span.className = 'ledger-status notguilty'; notguilty++;
+        } else {
+          span.textContent = 'Pending'; span.className = 'ledger-status pending'; pending++;
+        }
+      });
+      document.getElementById('tally-guilty').textContent = guilty;
+      document.getElementById('tally-notguilty').textContent = notguilty;
+      document.getElementById('tally-pending').textContent = pending;
+    }
+
+    document.addEventListener('change', function(e){
+      if(e.target.matches('input[type="radio"]')){ refreshTally(); }
+    });
+
+    refreshTally();
+  })();
+</script>
+
+</body>
+</html>
